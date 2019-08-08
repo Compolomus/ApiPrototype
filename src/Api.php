@@ -1,13 +1,6 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Home
- * Date: 08.08.2019
- * Time: 12:51
- */
+<?php declare(strict_types=1);
 
 namespace Compolomus\Prototype;
-
 
 class Api
 {

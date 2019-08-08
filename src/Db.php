@@ -4,7 +4,7 @@ namespace Compolomus\Prototype;
 
 use Compolomus\Prototype\Drivers\DriverInterface;
 
-class Adapter implements DriverInterface
+class Db implements DriverInterface
 {
     private $driver;
 

@@ -3,3 +3,5 @@
 /index.php
 /composer.lock
 /clover.xml
+/.config/config.dist
+/.config/db_config.dist
