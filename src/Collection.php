@@ -16,7 +16,7 @@ class Collection
 
     private function cmp(array $array, string $key, int $sort = Collection::ASC): array
     {
-        return uasort($array, static function (array $a, array $b) use ($key, $sort) {
+        return uasort($array, static function(array $a, array $b) use ($key, $sort) {
             return $sort ? $a[$key] <=> $b[$key] : $b[$key] <=> $a[$key];
         });
     }
