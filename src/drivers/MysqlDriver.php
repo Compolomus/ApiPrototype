@@ -69,7 +69,7 @@ class MysqlDriver implements DriverInterface
         $parts = [];
 
         foreach($keys as $field) {
-            $parts[] = '`' . $field . '` = ":' . $field . '"';
+            $parts[] = '`' . $field . '` = ?';
         }
 
         $sql .= count($parts) > 1 ? implode(', ', $parts) : $parts[0];
@@ -82,7 +82,7 @@ class MysqlDriver implements DriverInterface
 
     public function delete(array $conditions = []): DriverInterface
     {
-        $sql = 'DELETE `' . $this->table() . '` ';
+        $sql = 'DELETE FROM `' . $this->table() . '`';
         $sql .= $this->conditions($conditions);
         $this->result = $this->pdo->exec($sql);
 
