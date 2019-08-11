@@ -11,8 +11,6 @@ class Api
 
     private const ACCESS_KEYS_VALUES = ['create', 'update'];
 
-    private const TYPES = ['create', 'read', 'update', 'delete'];
-
     private const TABLES = ['users', 'files', 'likes', 'structure', 'subjects', 'tags'];
 
     private $prefix;
@@ -37,9 +35,6 @@ class Api
      */
     private function checkType(string $type, array $query): ?InvalidArgumentException
     {
-        if (!in_array($type, self::TYPES, true)) {
-            throw new InvalidArgumentException('Underfined type ' . $type);
-        }
         if (array_key_exists($type, self::ACCESS_CONDITIONS) && !array_key_exists('conditions', $query)) {
             throw new InvalidArgumentException('Not found conditions');
         }

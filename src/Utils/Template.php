@@ -21,7 +21,6 @@ class Template
         switch ($action) {
             case 'get':
                 return $this->$property;
-                break;
 
             case 'set':
                 $this->$property = $arguments[0];

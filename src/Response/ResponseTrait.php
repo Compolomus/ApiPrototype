@@ -11,6 +11,8 @@ trait ResponseTrait
         $this->set($data);
     }
 
+    abstract public function set(array $data);
+
     public function get()
     {
         return $this->data;
