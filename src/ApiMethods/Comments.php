@@ -2,7 +2,7 @@
 
 namespace Compolomus\Prototype\ApiMethods;
 
-class Comments
+class Comments extends AbstractApiMethod
 {
-
+    use GetTable;
 }

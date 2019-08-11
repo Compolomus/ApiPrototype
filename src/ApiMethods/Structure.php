@@ -2,7 +2,7 @@
 
 namespace Compolomus\Prototype\ApiMethods;
 
-class Structure
+class Structure extends AbstractApiMethod
 {
-
+    use GetTable;
 }

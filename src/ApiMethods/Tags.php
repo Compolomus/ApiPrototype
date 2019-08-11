@@ -2,7 +2,7 @@
 
 namespace Compolomus\Prototype\ApiMethods;
 
-class Tags
+class Tags extends AbstractApiMethod
 {
-
+    use GetTable;
 }

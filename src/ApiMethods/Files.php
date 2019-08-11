@@ -2,7 +2,7 @@
 
 namespace Compolomus\Prototype\ApiMethods;
 
-class Files
+class Files extends AbstractApiMethod
 {
-
+    use GetTable;
 }

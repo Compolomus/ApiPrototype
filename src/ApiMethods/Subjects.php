@@ -2,7 +2,7 @@
 
 namespace Compolomus\Prototype\ApiMethods;
 
-class Subjects
+class Subjects extends AbstractApiMethod
 {
-
+    use GetTable;
 }

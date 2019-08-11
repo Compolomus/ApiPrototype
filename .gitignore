@@ -5,3 +5,5 @@
 /clover.xml
 /.config/config.dist
 /.config/db_config.dist
+/.config/sql.sql.dist
+/.config/sql.sql.test

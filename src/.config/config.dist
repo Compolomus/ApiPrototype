@@ -1,9 +1,11 @@
 <?php
 
-return [
+return array (
     'prefix' => 'prefix',
-    'like' => true,
+    'db_driver' => 'mysql',
     'comments' => true,
+    'like' => true,
     'attach' => true,
     'tag' => true,
-];
+    'response' => 'array',
+);

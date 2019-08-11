@@ -6,6 +6,8 @@ use Compolomus\Prototype\Collection;
 
 interface DriverInterface
 {
+    public function table(?string $table = null): string;
+
     public function create(array $keys, array $values): bool;
 
     public function read(array $conditions = []): Collection;

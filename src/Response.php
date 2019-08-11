@@ -18,7 +18,7 @@ class Response implements ResponseInterface
     public function set(array $data): void
     {
         $ResponseName = 'Response' . ucfirst($this->format);
-        $this->response = new $ResponseName($data);
+        $this->response = (new $ResponseName($data))->get();
     }
 
     public function get(): ResponseInterface

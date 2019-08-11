@@ -2,7 +2,7 @@
 
 namespace Compolomus\Prototype\ApiMethods;
 
-class Likes
+class Likes extends AbstractApiMethod
 {
-
+    use GetTable;
 }

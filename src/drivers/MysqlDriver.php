@@ -10,15 +10,22 @@ class MysqlDriver implements DriverInterface
 
     private $pdo;
 
-    public function __construct(string $table, \PDO $pdo)
+    public function __construct(\PDO $pdo)
     {
-        $this->table = $table;
         $this->pdo = $pdo;
+    }
+
+    public function table(?string $table = null): string
+    {
+        if ($table !== null) {
+            $this->table = $table;
+        }
+        return $this->table;
     }
 
     public function create(array $keys, array $values): bool
     {
-        $sql = 'INSERT INTO `' . $this->table
+        $sql = 'INSERT INTO `' . $this->table()
             . '` (`' . implode('`, `', $keys) . '`)'
             . ' VALUES("' . implode('\", \"',
                 array_map(static function (string $key): string {
@@ -40,9 +47,10 @@ class MysqlDriver implements DriverInterface
 
     public function read(array $conditions = []): Collection
     {
-        $sql = 'SELECT * FROM `' . $this->table . '` ';
+        $sql = 'SELECT * FROM `' . $this->table() . '` ';
         $sql .= $this->conditions($conditions);
 
+        // ???
         $stmt = $this->pdo->prepare($sql)->execute();
 
         $collection = $stmt->fetchAll();
@@ -52,7 +60,7 @@ class MysqlDriver implements DriverInterface
 
     public function update(array $keys, array $values, array $conditions = []): bool
     {
-        $sql = 'UPDATE `' . $this->table . '` SET ';
+        $sql = 'UPDATE `' . $this->table() . '` SET ';
 
         $parts = [];
 
@@ -68,7 +76,7 @@ class MysqlDriver implements DriverInterface
 
     public function delete(array $conditions = []): int
     {
-        $sql = 'DELETE `' . $this->table . '` ';
+        $sql = 'DELETE `' . $this->table() . '` ';
         $sql .= $this->conditions($conditions);
 
         return $this->pdo->exec($sql);

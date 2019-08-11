@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Compolomus\Prototype;
+namespace Compolomus\Prototype\Utils;
 
 class Configurator
 {
