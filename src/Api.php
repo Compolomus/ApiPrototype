@@ -57,7 +57,7 @@ class Api
         return $this;
     }
 
-    public function get(): array
+    public function get()
     {
         // Response
         return $this->response->set(['data' => $this->result->get()])->get();

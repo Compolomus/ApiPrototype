@@ -11,7 +11,7 @@ trait ResponseTrait
         $this->set($data);
     }
 
-    public function get(): array
+    public function get()
     {
         return $this->data;
     }

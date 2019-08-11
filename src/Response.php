@@ -23,7 +23,7 @@ class Response implements ResponseInterface
         return $this;
     }
 
-    public function get(): array
+    public function get()
     {
         return $this->response;
     }

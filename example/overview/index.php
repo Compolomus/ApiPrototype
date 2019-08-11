@@ -11,7 +11,6 @@ $db_config = (new config(include CONFIG_DIR . 'db_settings.php'))->getConfig();
 
 $api = new Api($config, $db_config);
 
-
 // Insert
 $query = [
     'keys' => ['name', 'email', 'perm'],
@@ -20,7 +19,7 @@ $query = [
 
 $response = $api->request('users', 'create', $query)->get();
 
-echo '<pre>' . print_r($response['data'], true) . '</pre>';
+echo '<pre>' . print_r($respons, true) . '</pre>';
 
 // Read
 
@@ -34,7 +33,7 @@ $query = [
 
 $response = $api->request('users', 'read', $query)->get();
 
-echo '<pre>' . print_r($response['data'], true) . '</pre>';
+echo '<pre>' . print_r($response, true) . '</pre>';
 
 // Update
 
@@ -50,7 +49,7 @@ $query = [
 
 $response = $api->request('users', 'update', $query)->get();
 
-echo '<pre>' . print_r($response['data'], true) . '</pre>';
+echo '<pre>' . print_r($response, true) . '</pre>';
 
 //Read 2
 
@@ -64,7 +63,7 @@ $query = [
 
 $response = $api->request('users', 'read', $query)->get();
 
-echo '<pre>' . print_r($response['data'], true) . '</pre>';
+echo '<pre>' . print_r($response, true) . '</pre>';
 
 // Delete
 
@@ -77,4 +76,4 @@ $query = [
 
 $response = $api->request('users', 'delete', $query)->get();
 
-echo '<pre>' . print_r($response['data'], true) . '</pre>';
+echo '<pre>' . print_r($response, true) . '</pre>';

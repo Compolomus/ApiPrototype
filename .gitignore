@@ -7,3 +7,5 @@
 /.config/db_config.dist
 /.config/sql.sql.dist
 /.config/sql.sql.test
+/example/.config/settings.php
+/example/.config/db_settings.php
