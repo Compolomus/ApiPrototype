@@ -2,7 +2,6 @@
 
 namespace Compolomus\Prototype;
 
-use Compolomus\Prototype\Response\ResponseInterface;
 use InvalidArgumentException;
 
 class Api
@@ -67,7 +66,6 @@ class Api
 
     public function get()
     {
-        // Response
         return $this->response->set(['data' => $this->result->get()])->get();
     }
 }
