@@ -4,7 +4,7 @@ namespace Compolomus\Prototype\Response;
 
 interface ResponseInterface
 {
-    public function set(array $data): void;
+    public function set(array $data): ResponseInterface;
 
     public function get();
 }

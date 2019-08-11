@@ -6,8 +6,10 @@ class ResponseArray implements ResponseInterface
 {
     use ResponseTrait;
 
-    public function set(array $data): void
+    public function set(array $data): ResponseInterface
     {
         $this->data = $data;
+
+        return $this;
     }
 }

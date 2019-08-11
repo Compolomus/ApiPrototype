@@ -2,7 +2,6 @@
 
 namespace Compolomus\Prototype\ApiMethods;
 
-use Compolomus\Prototype\Collection;
 use Compolomus\Prototype\Drivers\DriverInterface;
 
 abstract class AbstractApiMethod
@@ -19,29 +18,35 @@ abstract class AbstractApiMethod
 
         $this->db = $db;
 
-        $this->db->table($prefix . '_' . static::getTable());
+        $this->db->table($prefix . basename($this->getTable()));
     }
 
-    abstract public function getTable(): string;
-
-    public function create(): bool
+    public function create(): self
     {
         $this->result = $this->db->create($this->query['keys'], $this->query['values']);
+
+        return $this;
     }
 
-    public function read(): Collection
+    public function read(): self
     {
         $this->result = $this->db->read($this->query['conditions']);
+
+        return $this;
     }
 
-    public function update(): bool
+    public function update(): self
     {
         $this->result = $this->db->update($this->query['keys'], $this->query['values'], $this->query['conditions']);
+
+        return $this;
     }
 
-    public function delete(): int
+    public function delete(): self
     {
-        return $this->db->delete($this->query['conditions']);
+        $this->result = $this->db->delete($this->query['conditions']);
+
+        return $this;
     }
 
     public function get()

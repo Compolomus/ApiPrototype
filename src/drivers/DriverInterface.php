@@ -2,21 +2,21 @@
 
 namespace Compolomus\Prototype\Drivers;
 
-use Compolomus\Prototype\Collection;
-
 interface DriverInterface
 {
     public function table(?string $table = null): string;
 
-    public function create(array $keys, array $values): bool;
+    public function get();
 
-    public function read(array $conditions = []): Collection;
+    public function create(array $keys, array $values): DriverInterface;
 
-    public function update(array $keys, array $values, array $conditions = []): bool;
+    public function read(array $conditions = []): DriverInterface;
 
-    public function delete(array $conditions = []): int;
+    public function update(array $keys, array $values, array $conditions = []): DriverInterface;
 
-    public function drop(): bool;
+    public function delete(array $conditions = []): DriverInterface;
 
-    public function truncate(): bool;
+    public function drop(): DriverInterface;
+
+    public function truncate(): DriverInterface;
 }

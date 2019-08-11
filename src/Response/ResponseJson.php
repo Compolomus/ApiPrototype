@@ -6,8 +6,10 @@ class ResponseJson implements ResponseInterface
 {
     use ResponseTrait;
 
-    public function set(array $data): void
+    public function set(array $data): ResponseInterface
     {
         $this->data = json_encode($data);
+
+        return $this;
     }
 }

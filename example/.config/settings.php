@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'prefix' => 'prefix',
+  'prefix' => '',
   'db_driver' => 'mysql',
   'response' => 'array',
   'comments' => true,

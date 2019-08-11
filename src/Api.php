@@ -2,14 +2,8 @@
 
 namespace Compolomus\Prototype;
 
-//use Compolomus\Prototype\ApiMethods\Users;
-//use Compolomus\Prototype\ApiMethods\Files;
-//use Compolomus\Prototype\ApiMethods\Likes;
-//use Compolomus\Prototype\ApiMethods\Structure;
-//use Compolomus\Prototype\ApiMethods\Subjects;
-//use Compolomus\Prototype\ApiMethods\Tags;
-use Compolomus\Prototype\Utils\Config;
-use \InvalidArgumentException;
+use Compolomus\Prototype\Response\ResponseInterface;
+use InvalidArgumentException;
 
 class Api
 {
@@ -29,21 +23,20 @@ class Api
 
     private $response;
 
-    public function __construct(string $config_filename, $db_config_file)
+    public function __construct(array $config, array $db_config)
     {
-        $config = (new Config(include $config_filename))->getConfig();
-        $db_config = (new Config(include $db_config_file))->getConfig();
-        $this->db = new Db($config['db_driver'], $db_config[$config['db_driver']]);
-        $this->prefix = $config['prefix'];
+        $this->db = (new Db($config['db_driver'], $db_config[$config['db_driver']]))->get();
+        $this->prefix = $config['prefix'] ? $config['prefix'] . '_' : '';
         $this->response = new Response($config['response']);
     }
 
-    /**
+    /**]
      * @param string $table
      * @param string $type
      * @param array $query
+     * @return Api
      */
-    public function request(string $table, string $type, array $query): void
+    public function request(string $table, string $type, array $query): self
     {
         if (!in_array($type, self::TYPES, true)) {
             throw new InvalidArgumentException('Underfined type ' . $type);
@@ -51,20 +44,22 @@ class Api
         if (!in_array($table, self::TABLES, true)) {
             throw new InvalidArgumentException('Underfined table ' . $table);
         }
-        if (!array_key_exists($type, self::ACCESS_CONDITIONS) && !in_array('conditions', $query, true)) {
+        if (array_key_exists($type, self::ACCESS_CONDITIONS) && !array_key_exists('conditions', $query)) {
             throw new InvalidArgumentException('Not found conditions');
         }
-        if (!array_key_exists($type, self::ACCESS_KEYS_VALUES) && !in_array('keys', $query, true) && !in_array('values', $query, true)) {
+        if (array_key_exists($type, self::ACCESS_KEYS_VALUES) && !array_key_exists('keys', $query) && !array_key_exists('values', $query)) {
             throw new InvalidArgumentException('Not found keys or values');
         }
 
-        $table = ucfirst($table);
+        $table = 'Compolomus\\Prototype\\ApiMethods\\' . ucfirst($table);
         $this->result = (new $table($query, $this->prefix, $this->db))->$type()->get();
+
+        return $this;
     }
 
-    public function get(): Response
+    public function get(): array
     {
         // Response
-        return $this->result;
+        return $this->response->set(['data' => $this->result->get()])->get();
     }
 }

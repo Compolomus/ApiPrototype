@@ -15,13 +15,15 @@ class Response implements ResponseInterface
         $this->format = $format;
     }
 
-    public function set(array $data): void
+    public function set(array $data): ResponseInterface
     {
-        $ResponseName = 'Response' . ucfirst($this->format);
-        $this->response = (new $ResponseName($data))->get();
+        $ResponseType = 'Compolomus\\Prototype\\Response\\Response' . ucfirst($this->format);
+        $this->response = (new $ResponseType($data))->get();
+
+        return $this;
     }
 
-    public function get(): ResponseInterface
+    public function get(): array
     {
         return $this->response;
     }
