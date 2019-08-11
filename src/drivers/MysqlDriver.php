@@ -68,7 +68,7 @@ class MysqlDriver implements DriverInterface
 
         $parts = [];
 
-        foreach($keys as $field) {
+        foreach ($keys as $field) {
             $parts[] = '`' . $field . '` = ?';
         }
 

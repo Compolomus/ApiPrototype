@@ -8,12 +8,14 @@ class Template
 
     private $ext;
 
-    public function __construct(string $dir, string $ext) {
+    public function __construct(string $dir, string $ext)
+    {
         $this->dir = $dir;
         $this->ext = $ext;
     }
 
-    public function __call(string $name, array $arguments) {
+    public function __call(string $name, array $arguments)
+    {
         $action = substr($name, 0, 3);
         $property = strtolower(substr($name, 3));
         switch ($action) {
@@ -30,13 +32,15 @@ class Template
         }
     }
 
-    public function args(array $args) {
+    public function args(array $args)
+    {
         return call_user_func_array(array($this, 'render'), $args);
     }
 
-    public function render(string $tpl, array $data = []) {
+    public function render(string $tpl, array $data = [])
+    {
         if (count($data)) {
-            foreach($data as $key => $val) {
+            foreach ($data as $key => $val) {
                 $k = 'set' . $key;
                 $this->$k($val);
             }
