@@ -29,7 +29,7 @@ if (!file_exists(CONFIG_DIR . 'settings.php')) {
 
         echo '<h2>Конфиг сохранен</h2>';
     } else {
-        $config = (new config(include '../src/.config/config.dist'))->getConfig();
+        $config = (new config(include '../src/config/config.dist'))->getConfig();
 
         $tpl = new Template('tpl', 'tpl');
 

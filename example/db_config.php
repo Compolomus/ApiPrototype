@@ -9,7 +9,7 @@ $config = (new config(include CONFIG_DIR . 'settings.php'))->getConfig();
 $driver = $config['db_driver'];
 $prefix = $config['prefix'];
 
-$db_config = (new config(include '../src/.config/db_config.dist'))->getConfig();
+$db_config = (new config(include '../src/config/db_config.dist'))->getConfig();
 
 if (!file_exists(CONFIG_DIR . 'db_settings.php')) {
     if ($_POST['submit']) {
