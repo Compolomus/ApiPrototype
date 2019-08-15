@@ -23,10 +23,10 @@ class Pagination
      */
     public function __construct(int $page, int $limit, int $total, int $length = 3)
     {
-        $this->page = $page >= 1 ? $page : 1;
-        $this->limit = $limit >= 1 ? $limit : 10;
-        $this->total = $total;
         $this->totalPages = (int)ceil($total / $limit);
+        $this->page = $page < 1 ? 1 : ($page > $this->totalPages ? $this->totalPages : $page);
+        $this->limit = $limit > 0 ? $limit : 10;
+        $this->total = $total;
         $this->length = $length >= 0 ? $length : 3;
     }
 
@@ -61,10 +61,14 @@ class Pagination
     {
         $result = [];
 
-        $result[2] = $leftDots = $this->page - $this->length >= 3 ? '...' : 0;
+        $leftDots = $this->page - $this->length;
 
-        for ($x = $this->length, $i = $this->page - 1; $i > ($leftDots ? $this->page - $this->length - 1 : 2); $x--, $i--) {
-            $result[$i] = $i;
+        if ($leftDots > 0) {
+            $result[2] = '...';
+        }
+
+        foreach ($leftDots > 0 ? range($this->page, $leftDots) : range($this->page, 2) as $value) {
+            $result[$value] = $value;
         }
 
         return $result;
@@ -77,10 +81,14 @@ class Pagination
     {
         $result = [];
 
-        $result[$this->totalPages - 1] = $rightDots = $this->page + $this->length <= $this->totalPages - 2 ? '...' : 0;
+        $rightDots = ($this->totalPages - 1) - ($this->page + $this->length);
 
-        for ($x = 1, $i = $this->page + 1; $i < ($rightDots ? $this->page + $this->length + 1 : $this->total - 1); $x++, $i++) {
-            $result[$i] = $i;
+        foreach ($rightDots > 0 ? range($this->page, $this->page + $this->length) : range($this->page, $this->totalPages - 1) as $value) {
+            $result[$value] = $value;
+        }
+
+        if ($rightDots > 0) {
+            $result[$this->totalPages - 1] = '...';
         }
 
         return $result;
@@ -91,18 +99,18 @@ class Pagination
      */
     public function get(): array
     {
-        $al = [1 => 'first'];
+        $result = [1 => 'first'];
 
-        $al += $this->leftPad();
+        $result += $this->leftPad();
 
-        $al[$this->page] = 'current';
+        $result[$this->page] = 'current';
 
-        $al += $this->rightPad();
+        $result += $this->rightPad();
 
-        $al[$this->totalPages] = 'last';
+        $result[$this->totalPages] = 'last';
 
-        ksort($al);
+        ksort($result);
 
-        return $al;
+        return $result;
     }
 }
