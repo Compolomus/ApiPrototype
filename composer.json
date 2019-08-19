@@ -23,6 +23,7 @@
     "ext-json": "*"
   },
   "require-dev": {
+    "compolomus/pagination": "*",
     "phpunit/phpunit": "~6.0",
     "zendframework/zend-coding-standard": "^1.0"
   },
